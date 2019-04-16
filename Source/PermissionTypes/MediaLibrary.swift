@@ -35,6 +35,9 @@ internal extension Permission {
         case .authorized:          return .authorized
         case .restricted, .denied: return .denied
         case .notDetermined:       return .notDetermined
+        @unknown default:
+            print("WARNING: \(status) is new and not handled by the switch")
+            return .notDetermined
         }
     }
     

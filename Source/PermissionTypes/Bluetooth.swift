@@ -37,6 +37,9 @@ extension Permission {
         case .restricted: return .disabled
         case .denied: return .denied
         case .notDetermined, .authorized: break
+        @unknown default:
+            print("WARNING: \(status) is new and not handled by the switch")
+            break
         }
         
         guard UserDefaults.standard.stateBluetoothManagerDetermined else { return .notDetermined }
@@ -47,6 +50,9 @@ extension Permission {
         case .poweredOn: return .authorized
         case .resetting, .unknown:
             return UserDefaults.standard.statusBluetooth ?? .notDetermined
+        @unknown default:
+            print("WARNING: \(status) is new and not handled by the switch")
+            return .notDetermined
         }
     }
     

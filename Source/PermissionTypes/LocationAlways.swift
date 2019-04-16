@@ -37,6 +37,9 @@ internal extension Permission {
             return UserDefaults.standard.requestedLocationAlwaysWithWhenInUse ? .denied : .notDetermined
         case .notDetermined: return .notDetermined
         case .restricted, .denied: return .denied
+        @unknown default:
+            print("WARNING: \(status) is new and not handled by the switch")
+            return .notDetermined
         }
     }
     
